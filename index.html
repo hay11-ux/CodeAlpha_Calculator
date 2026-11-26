@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#10182c" />
+    <meta name="description" content="A simple keyboard-friendly calculator." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2310182c'/%3E%3Cpath d='M9 16h14M16 9v14' stroke='%2390e8cb' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <title>Calculette — Simple Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="calculator-shell" aria-label="Calculette">
+      <section class="calculator" aria-label="Calculator">
+        <header class="calculator__header">
+          <div>
+          </div>
+          <div class="status"><span class="status__text">Ready</span></div>
+        </header>
+
+        <div class="screen" aria-live="polite" aria-atomic="true">
+          <div class="screen__history" id="history">&nbsp;</div>
+          <output class="screen__value" id="display">0</output>
+        </div>
+
+        <div class="keys" role="group" aria-label="Calculator keys">
+          <button class="key key--utility" data-action="clear" aria-label="Clear all">AC</button>
+          <button class="key key--utility" data-action="delete" aria-label="Delete last digit">DEL</button>
+          <button class="key key--operator" data-action="percent" aria-label="Percent">%</button>
+          <button class="key key--operator" data-value="/" aria-label="Divide">÷</button>
+
+          <button class="key" data-value="7">7</button>
+          <button class="key" data-value="8">8</button>
+          <button class="key" data-value="9">9</button>
+          <button class="key key--operator" data-value="*" aria-label="Multiply">×</button>
+
+          <button class="key" data-value="4">4</button>
+          <button class="key" data-value="5">5</button>
+          <button class="key" data-value="6">6</button>
+          <button class="key key--operator" data-value="-" aria-label="Subtract">−</button>
+
+          <button class="key" data-value="1">1</button>
+          <button class="key" data-value="2">2</button>
+          <button class="key" data-value="3">3</button>
+          <button class="key key--operator" data-value="+" aria-label="Add">+</button>
+
+          <button class="key key--wide" data-value="0">0</button>
+          <button class="key" data-value=".">.</button>
+          <button class="key key--equals" data-action="equals" aria-label="Equals">=</button>
+        </div>
+
+        <p class="hint"><kbd>⌨</kbd> Use your keyboard — <kbd>Enter</kbd> to calculate, <kbd>Esc</kbd> to clear</p>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
