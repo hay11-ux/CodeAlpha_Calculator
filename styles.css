@@ -1,0 +1,183 @@
+:root {
+  color-scheme: dark;
+  --ink: #eef3ff;
+  --muted: #a9b6d5;
+  --panel: #17223c;
+  --panel-deep: #10182c;
+  --key: #243253;
+  --key-hover: #30436e;
+  --utility: #36435f;
+  --accent: #90e8cb;
+  --accent-deep: #4ccca4;
+  --operator: #ffd18a;
+  --error: #ff8f9f;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  min-width: 280px;
+  min-height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  color: var(--ink);
+  font-family: Manrope, Arial, sans-serif;
+  background:
+    radial-gradient(circle at 12% 16%, rgb(76 204 164 / 20%), transparent 30rem),
+    radial-gradient(circle at 86% 82%, rgb(106 135 249 / 23%), transparent 28rem),
+    #091020;
+}
+
+.calculator-shell {
+  width: min(100%, 410px);
+  position: relative;
+}
+
+.calculator-shell::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 24px -24px -24px 24px;
+  border: 1px solid rgb(144 232 203 / 22%);
+  border-radius: 32px;
+}
+
+.calculator {
+  padding: clamp(20px, 5vw, 30px);
+  border: 1px solid rgb(197 216 255 / 17%);
+  border-radius: 28px;
+  background: linear-gradient(145deg, rgb(33 48 81 / 97%), rgb(16 24 44 / 98%));
+  box-shadow: 0 30px 80px rgb(0 0 0 / 37%);
+}
+
+.calculator__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.eyebrow { margin: 0 0 3px; color: var(--accent); font: 500 0.69rem/1.2 "DM Mono", monospace; letter-spacing: .12em; }
+h1 { margin: 0; font-size: 1.35rem; letter-spacing: -.04em; }
+
+.status {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 10px;
+  border: 1px solid rgb(144 232 203 / 25%);
+  border-radius: 999px;
+  color: var(--muted);
+  font: 500 0.7rem/1 "DM Mono", monospace;
+}
+
+.status__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-deep);
+  box-shadow: 0 0 8px var(--accent-deep);
+}
+
+.status.is-error { border-color: rgb(255 143 159 / 35%); }
+.status.is-error .status__dot { background: var(--error); box-shadow: 0 0 8px var(--error); }
+
+.screen {
+  margin-bottom: 20px;
+  padding: 16px 18px;
+  overflow: hidden;
+  text-align: right;
+  border: 1px solid rgb(197 216 255 / 10%);
+  border-radius: 18px;
+  background: var(--panel-deep);
+  box-shadow: inset 0 2px 12px rgb(0 0 0 / 35%);
+}
+
+.screen__history {
+  min-height: 1.3em;
+  overflow: hidden;
+  color: var(--muted);
+  font: 400 0.85rem/1.3 "DM Mono", monospace;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.screen__value {
+  display: block;
+  margin-top: 6px;
+  overflow: hidden;
+  font: 500 2.5rem/1.15 "DM Mono", monospace;
+  letter-spacing: -.03em;
+  white-space: nowrap;
+}
+
+.screen__value.is-error { color: var(--error); }
+
+.keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.key {
+  height: 60px;
+  padding: 0;
+  border: 0;
+  border-radius: 16px;
+  background: var(--key);
+  color: var(--ink);
+  font: 700 1.2rem/1 Manrope, Arial, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 3px 0 rgb(0 0 0 / 28%);
+  transition: background .12s ease, transform .08s ease, box-shadow .08s ease;
+}
+
+.key:hover { background: var(--key-hover); }
+
+.key:active,
+.key.is-pressed {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 rgb(0 0 0 / 28%);
+}
+
+.key:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.key--utility { background: var(--utility); color: var(--muted); font-size: .95rem; }
+.key--utility:hover { background: #435274; }
+
+.key--operator { color: var(--operator); background: rgb(255 209 138 / 12%); }
+.key--operator:hover { background: rgb(255 209 138 / 22%); }
+.key--operator.is-active { background: var(--operator); color: var(--panel-deep); }
+
+.key--wide { grid-column: span 2; }
+
+.key--equals { background: var(--accent); color: var(--panel-deep); }
+.key--equals:hover { background: var(--accent-deep); }
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: .74rem;
+  text-align: center;
+}
+
+kbd {
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: var(--key);
+  color: var(--ink);
+  font: 500 .7rem "DM Mono", monospace;
+}
+
+@media (max-width: 380px) {
+  .key { height: 52px; }
+  .screen__value { font-size: 2rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .key { transition: none; }
+}
